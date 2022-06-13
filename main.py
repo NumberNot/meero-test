@@ -1,7 +1,8 @@
 from ast import Index
 import datetime as dt
+from distutils.log import error
 
-today = dt.date.today()
+today = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 file_name = "log.txt"
 file = open(file_name, "r")
@@ -29,15 +30,17 @@ for item in res:
     occur(item)
     print(unique_lst)
     for items in range(len(unique_lst)):
-        a = [sub['condition'] for sub in unique_lst]
-        try:
-            if str(a[items]) == "Start" and str(a[items+1]) == "End":
-                print(a[items])
-                print(a[items+1])
-        except:
-            print("No end")
+        condition = [sub['condition'] for sub in unique_lst]
         time_period = [dt.datetime.strptime(
             sub['date'], '%Y-%m-%dT%H:%M') for sub in unique_lst]
-        # print(time_period[items])
+        try:
+            if str(condition[items]) == "Start" and str(condition[items+1]) == "End":
+                run_time = dt.datetime.strptime(str(time_period[items+1]), '%Y-%m-%d %H:%M:%S')-dt.datetime.strptime(
+                    str(time_period[items]), '%Y-%m-%d %H:%M:%S'), dt.timedelta()
+                print(str(run_time[0]))
+        except:
+            run_time = dt.datetime.strptime(str(today), '%Y-%m-%d %H:%M:%S')-dt.datetime.strptime(
+                    str(time_period[items]), '%Y-%m-%d %H:%M:%S'), dt.timedelta()
+            print(str(run_time[0]))
     unique_lst = []
 
