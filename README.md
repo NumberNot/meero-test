@@ -5,6 +5,7 @@
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
+- [Tests](#tests)
 
 ## About <a name = "about"></a>
 
@@ -30,3 +31,9 @@ No requirements.txt.
 No pip import.
 
 Just hit&run.
+
+## Tests <a name = "tests"></a>
+
+Several tests were implemented.
+
+Standart pytest is needed.
